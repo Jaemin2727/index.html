@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>해오름항 배낚시 — 출조 예약</title>
+  <meta name="description" content="해오름항 출조 배낚시 예약. 갈치, 쭈꾸미·갑오징어, 우럭·광어, 참돔 출조 일정을 보고 배 위의 낚시 자리를 직접 골라 예약하세요.">
+  <link rel="icon" href="img/logo-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== 헤더 ===== -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#top" class="logo" aria-label="해오름항 배낚시 홈">
+        <img src="img/logo-mark.svg" alt="" width="36" height="36">
+        <span class="logo-text"><b>해오름항 배낚시</b><small>HAEOREUM FISHING</small></span>
+      </a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="#calendar">출조 달력</a>
+        <a href="#trips">출조 일정</a>
+        <a href="#fish">어종 · 채비</a>
+        <a href="#boats">선박</a>
+        <a href="#membership">멤버십</a>
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="user-btn" id="userBtn">로그인</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===== 히어로 슬라이드 (사진 4장, 6초마다 교차) ===== -->
+    <section class="hero" aria-label="메인 배너">
+      <div class="slide is-active">
+        <img src="img/hero-1.svg" alt="해 뜨는 바다로 출항하는 낚싯배의 실루엣">
+        <div class="container slide-text">
+          <span class="slide-tag">해오름항 출조</span>
+          <h1>해 뜨기 전,<br><em>해오름항에서 출항.</em></h1>
+          <p>갈치부터 참돔까지 4척의 배가 매주 출항해요. 일정을 고르고 배 위 낚시 자리를 직접 선택하세요.</p>
+          <a href="#trips" class="btn btn-orange">출조 일정 보기</a>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="img/hero-2.svg" alt="밤바다에서 집어등을 켠 갈치 낚싯배">
+        <div class="container slide-text">
+          <span class="slide-tag">갈치 야간 출조</span>
+          <h2>은빛 갈치가<br><em>올라오는 밤.</em></h2>
+          <p>집어등을 밝힌 은갈치호에서 즐기는 야간 갈치 낚시. 채비 대여도 할 수 있어요.</p>
+          <a href="#trips" class="btn btn-orange" data-fish="1">갈치 출조 보기</a>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="img/hero-3.svg" alt="휘어진 낚싯대 끝에서 물 위로 튀어 오르는 참돔">
+        <div class="container slide-text">
+          <span class="slide-tag">참돔 타이라바</span>
+          <h2>손끝으로 전해지는<br><em>참돔의 입질.</em></h2>
+          <p>정원 12명의 해오름1호로 여유 있게 즐기는 참돔 타이라바 출조.</p>
+          <a href="#trips" class="btn btn-orange" data-fish="4">참돔 출조 보기</a>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="img/hero-4.svg" alt="빨간 등대가 있는 방파제와 항구에 정박한 낚싯배들">
+        <div class="container slide-text">
+          <span class="slide-tag">좌석 직접 선택</span>
+          <h2>원하는 자리를<br><em>직접 골라 예약.</em></h2>
+          <p>선수, 선미, 좌현, 우현. 배 안의 낚시 자리를 그림으로 보고 비어 있는 자리를 바로 선택하세요.</p>
+          <a href="#boats" class="btn btn-orange">선박 소개 보기</a>
+        </div>
+      </div>
+
+      <div class="hero-controls container">
+        <span class="hero-count"><b id="heroNow">01</b> / 04</span>
+        <div class="hero-dots" id="heroDots"></div>
+        <div class="hero-arrows">
+          <button type="button" id="heroPrev" aria-label="이전 슬라이드">‹</button>
+          <button type="button" id="heroNext" aria-label="다음 슬라이드">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 혜택 ===== -->
+    <section class="benefits" aria-label="예약 혜택">
+      <div class="container benefit-list">
+        <p><b>가입 즉시 3,000P</b><span>신규 회원 웰컴 포인트</span></p>
+        <p><b>낚시 자리 직접 선택</b><span>배 그림에서 빈자리 클릭</span></p>
+        <p><b>기상 악화 시 전액 환불</b><span>출항 취소 시 자동 환불</span></p>
+      </div>
+    </section>
+
+    <!-- ===== 출조 달력 (날씨 · 일정 · 조과) ===== -->
+    <section class="section" id="calendar">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">CALENDAR</span>
+          <h2>날짜별 날씨 · 출조 · 조과</h2>
+          <p>날짜를 누르면 그날의 바다 날씨, 출조 일정, 지난 출조의 조과를 한눈에 볼 수 있어요. 날씨와 조과는 수업용 예시 자료예요.</p>
+        </div>
+        <div class="calendar-wrap">
+          <div class="calendar">
+            <div class="cal-head">
+              <button type="button" class="cal-nav" id="calPrev" aria-label="이전 달">‹</button>
+              <h3 id="calTitle"></h3>
+              <button type="button" class="cal-nav" id="calNext" aria-label="다음 달">›</button>
+            </div>
+            <div class="cal-week" aria-hidden="true"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+            <div class="cal-grid" id="calGrid"></div>
+            <div class="cal-legend">
+              <span><i class="dot dot-open"></i>예약 가능</span>
+              <span><i class="dot dot-full"></i>마감</span>
+              <span><i class="dot dot-done"></i>조과 있음</span>
+              <span><i class="dot dot-cancel"></i>기상 취소</span>
+              <span><i class="dot dot-mine"></i>내 예약</span>
+            </div>
+          </div>
+          <div class="day-panel" id="dayPanel" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 대상어종 · 채비 안내 ===== -->
+    <section class="section" id="fish">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">TARGET FISH · TACKLE</span>
+          <h2>대상어종과 챙겨올 채비</h2>
+          <p>출조마다 대상어종이 정해져 있어요. 어종을 고르면 어떤 채비를 가져와야 하는지 알려드려요.</p>
+        </div>
+        <div class="fish-tabs" id="fishTabs" role="tablist" aria-label="대상어종 선택"></div>
+        <div class="tackle-panel" id="tacklePanel" role="tabpanel"></div>
+      </div>
+    </section>
+
+    <!-- ===== 출조 일정 ===== -->
+    <section class="section section-soft" id="trips">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">SCHEDULE</span>
+          <h2>출조 일정</h2>
+          <p>일정을 누르면 날씨, 채비, 배 안의 낚시 자리를 보고 예약할 수 있어요.</p>
+        </div>
+        <div class="toolbar">
+          <label class="search-box">
+            <span class="sr-only">출조 검색</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input type="search" id="searchInput" placeholder="배 이름, 어종으로 검색">
+          </label>
+          <select id="statusSelect" aria-label="출조 상태">
+            <option value="upcoming">예정된 출조</option>
+            <option value="open">예약 가능한 출조만</option>
+            <option value="past">지난 출조 (조과 보기)</option>
+            <option value="all">전체</option>
+          </select>
+          <select id="sortSelect" aria-label="정렬">
+            <option value="date">날짜순</option>
+            <option value="low">낮은 가격순</option>
+            <option value="seats">남은 자리 많은순</option>
+          </select>
+        </div>
+        <div class="filter-row">
+          <div class="filter-tabs" id="filterTabs" role="tablist" aria-label="어종 필터"></div>
+        </div>
+        <p class="result-text" id="resultText"></p>
+        <div class="trip-grid" id="tripGrid"></div>
+      </div>
+    </section>
+
+    <!-- ===== 선박 소개 ===== -->
+    <section class="section" id="boats">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">OUR BOATS</span>
+          <h2>해오름항 낚싯배 4척</h2>
+          <p>모든 배에 구명조끼, 화장실, 어군탐지기가 갖춰져 있어요.</p>
+        </div>
+        <div class="boat-list" id="boatList"></div>
+      </div>
+    </section>
+
+    <!-- ===== 이용 안내 ===== -->
+    <section class="section section-sea" id="guide">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">GUIDE</span>
+          <h2>승선 전 꼭 확인하세요</h2>
+        </div>
+        <ol class="guide-list">
+          <li><b>신분증 지참</b>승선명부 작성을 위해 승선하는 모든 분이 신분증을 가져와야 해요.</li>
+          <li><b>출항 30분 전 집결</b>해오름항 2번 선착장 매표소 앞으로 모여주세요.</li>
+          <li><b>구명조끼 착용</b>배 위에서는 항상 구명조끼를 입어야 해요. 배에 준비돼 있어요.</li>
+          <li><b>기상 악화 시 출항 취소</b>풍랑 특보 등으로 출항이 취소되면 결제 금액과 포인트를 모두 돌려드려요.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== 멤버십 ===== -->
+    <section class="section" id="membership">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">MEMBERSHIP</span>
+          <h2>자주 탈수록 올라가는 등급</h2>
+          <p>누적 예약금액에 따라 등급이 바뀌고, 결제 금액의 1% ~ 9%를 포인트로 돌려드려요.</p>
+        </div>
+        <div class="grade-list" id="gradeList"></div>
+        <ul class="point-rules">
+          <li><b>적립</b> 예약금액에서 사용한 포인트를 뺀 금액에 등급 적립률을 곱해 적립해요.</li>
+          <li><b>사용</b> 1,000P 이상 모이면 1P = 1원으로 결제할 때 쓸 수 있어요.</li>
+          <li><b>취소</b> 출항 전날까지 마이페이지에서 취소하면 사용한 포인트는 돌려받고, 적립된 포인트는 회수돼요.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== 푸터 ===== -->
+  <footer class="footer">
+    <div class="container">
+      <a href="#top" class="logo logo-footer">
+        <img src="img/logo-mark.svg" alt="" width="36" height="36">
+        <span class="logo-text"><b>해오름항 배낚시</b><small>HAEOREUM FISHING</small></span>
+      </a>
+      <p>집결 장소: 해오름항 2번 선착장 매표소 앞 · 출항 30분 전까지</p>
+      <p class="footer-info">경영데이터베이스및실습 수업 과제로 만든 예약 사이트입니다. 해오름항과 선박은 가상으로 만든 것이며, 결제는 체험용이라 실제 결제와 출조는 이루어지지 않습니다.</p>
+      <p class="copyright">© 2026 HAEOREUM FISHING</p>
+    </div>
+  </footer>
+
+  <!-- ===== 팝업: 로그인 / 회원가입 ===== -->
+  <dialog class="modal modal-sm" id="authModal" aria-labelledby="authTitle">
+    <button type="button" class="modal-close" data-close aria-label="닫기">×</button>
+    <h2 id="authTitle">로그인</h2>
+    <p class="modal-sub" id="authSub">로그인하고 예약하면 등급별 포인트를 받아요.</p>
+    <div class="auth-tabs">
+      <button type="button" class="is-on" data-auth-tab="login">로그인</button>
+      <button type="button" data-auth-tab="signup">회원가입</button>
+    </div>
+
+    <form id="loginForm" novalidate>
+      <label class="field">이메일<input type="email" id="loginEmail" autocomplete="email" placeholder="you@example.com"></label>
+      <label class="field">비밀번호<input type="password" id="loginPw" autocomplete="current-password" placeholder="비밀번호"></label>
+      <p class="form-error" id="loginError" role="alert"></p>
+      <button type="submit" class="btn btn-sea btn-full">로그인</button>
+    </form>
+
+    <form id="signupForm" novalidate hidden>
+      <p class="welcome">가입하면 <b>3,000P</b>를 바로 드려요!</p>
+      <label class="field">이름<input type="text" id="signName" autocomplete="name" placeholder="홍길동"></label>
+      <label class="field">이메일<input type="email" id="signEmail" autocomplete="email" placeholder="you@example.com"></label>
+      <label class="field">비밀번호 (영문+숫자 8자 이상)<input type="password" id="signPw" autocomplete="new-password"></label>
+      <label class="field">비밀번호 확인<input type="password" id="signPw2" autocomplete="new-password"></label>
+      <label class="field">휴대폰 번호<input type="tel" id="signPhone" autocomplete="tel" placeholder="010-1234-5678"></label>
+      <label class="check"><input type="checkbox" id="signAgree"> [필수] 이용약관 및 개인정보 수집에 동의합니다</label>
+      <p class="form-error" id="signupError" role="alert"></p>
+      <button type="submit" class="btn btn-sea btn-full">가입하고 3,000P 받기</button>
+    </form>
+  </dialog>
+
+  <!-- ===== 팝업: 출조 상세 + 좌석 배치도 ===== -->
+  <dialog class="modal modal-lg" id="tripModal" aria-label="출조 상세와 좌석 선택">
+    <button type="button" class="modal-close" data-close aria-label="닫기">×</button>
+    <div id="tripBody"></div>
+  </dialog>
+
+  <!-- ===== 팝업: 체험 결제 ===== -->
+  <dialog class="modal modal-lg" id="checkoutModal" aria-labelledby="checkoutTitle">
+    <button type="button" class="modal-close" data-close aria-label="닫기">×</button>
+    <h2 id="checkoutTitle">예약 · 체험 결제</h2>
+    <p class="modal-sub">실제 결제는 이루어지지 않고 예약 내역만 저장돼요.</p>
+    <div id="checkoutBody"></div>
+  </dialog>
+
+  <!-- ===== 팝업: 예약 완료 ===== -->
+  <dialog class="modal modal-sm" id="doneModal" aria-labelledby="doneTitle">
+    <div id="doneBody"></div>
+  </dialog>
+
+  <!-- ===== 팝업: 마이페이지 ===== -->
+  <dialog class="modal modal-lg" id="myModal" aria-labelledby="myTitle">
+    <button type="button" class="modal-close" data-close aria-label="닫기">×</button>
+    <div id="myBody"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
